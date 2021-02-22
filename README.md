@@ -1,2 +1,2 @@
-# My-Applications
+# MyApplications
 Workshop applications
