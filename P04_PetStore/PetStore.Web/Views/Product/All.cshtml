@@ -1,0 +1,109 @@
+﻿@model IEnumerable<PetStore.ViewModels.Product.ListAllProductsViewModel>
+
+@{
+    ViewData["Title"] = "All";
+}
+<div class="jumbotron-fluid">
+    <div class="text-center">
+        <h1>Search</h1>
+    </div>
+
+    <br />
+    <!-- Search form -->
+    <form asp-action="Search" method="get">
+        <div class="md-form active-pink-2 mb-3">
+            <input name="searchWord" class="form-control" type="text" placeholder="Search" aria-label="Search">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Search" class="btn btn-info" />
+        </div>
+    </form>
+</div>
+
+<br />
+<hr />
+
+<div class="text-center">
+    <h1>All</h1>
+</div>
+
+<div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="foodCheckBox" value="1">
+        <label class="form-check-label" for="foodCheckBox">Food</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="toysCheckBox" value="2">
+        <label class="form-check-label" for="toysCheckBox">Toys</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="decoCheckBox" value="3">
+        <label class="form-check-label" for="decoCheckBox">Decorations</label>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <div class="text-right jumbotron-fluid">
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p class="text-center">
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-success" asp-action="Create">Create New</a>
+    }
+</p>
+
+<script>
+    $("#foodCheckBox").on('change',
+        function () {
+            var tbody = $("#tbody");
+
+            if ($(this).is(":checked")) {
+                for (var tr in tbody.childNodes) {
+                    var trData = tr.childNodes[1].value;
+
+                    if (trData === "Food") {
+                        tr.show();
+                    } else {
+                        tr.hide();
+                    }
+                }
+            }
+        });
+</script>
