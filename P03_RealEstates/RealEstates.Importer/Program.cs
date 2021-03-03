@@ -16,7 +16,7 @@ namespace RealEstates.Importer
             var properties = JsonSerializer.Deserialize<IEnumerable<JsonProperty>>(json);
             var db = new RealEstateDbContext();
             IPropertiesService propertiesService = new PropertiesService(db);
-            foreach (var property in properties.Where(x => x.Price > 1000))
+            foreach (var property in properties.Where(x => x.Price > 1000).Skip(500))
             {
                 try
                 {

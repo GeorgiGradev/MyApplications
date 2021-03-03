@@ -70,9 +70,6 @@ namespace RealEstates.Services
 
             property.BuildingType = buildingTypeEntity;
 
-
-
-            // Save Changes
             this.db.RealEstateProperties.Add(property);
             this.db.SaveChanges();
 
@@ -85,7 +82,7 @@ namespace RealEstates.Services
                 .Where(x => x.Year >= minYear && x.Year <= maxYear && x.Size >= minSize && x.Size <= maxSize)
                 .Select(MapToPropertyViewModel())
                 .OrderBy(x => x.Price)
-                .ToList(); 
+                .ToList();
         }
 
         public IEnumerable<PropertyViewModel> SearchByPrice(int minPrice, int maxPrice)
