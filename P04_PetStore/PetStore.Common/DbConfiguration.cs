@@ -2,6 +2,6 @@
 {
     public static class DbConfiguration
     {
-        public static string DefConnectionString = @"Server=DESKTOP-2ASBARL\SQLEXPRESS;Database=PetStore;Integrated Security=True;";
+        public static string DefConnectionString = @"Server=.;Database=PetStore;Integrated Security=True;";
     }
 }

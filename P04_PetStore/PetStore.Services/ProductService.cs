@@ -27,9 +27,9 @@ namespace PetStore.Services
             this.dbContext = dbContext;
             this.mapper = mapper;
         }
-
+        //DONE
         public void AddProduct(AddProductInputServiceModel model)
-        {
+        { 
             try
             {
                 Product product = this.mapper.Map<Product>(model);
@@ -42,7 +42,7 @@ namespace PetStore.Services
                 throw new ArgumentException(ExceptionMessages.InvalidProductType);
             }
         }
-
+        //DONE
         public ICollection<ListAllProductsServiceModel> GetAll()
         {
             var products = this.dbContext
@@ -52,7 +52,7 @@ namespace PetStore.Services
 
             return products;
         }
-
+        //DONE
         public ICollection<ListAllProductsByProductTypeServiceModel> ListAllByProductType(string type)
         {
             ProductType productType;
@@ -72,7 +72,7 @@ namespace PetStore.Services
 
             return productsServiceModels;
         }
-
+        //DONE 
         public ICollection<ListAllProductsByNameServiceModel> SearchByName(string searchStr, bool caseSensitive)
         {
             ICollection<ListAllProductsByNameServiceModel> products;
@@ -98,7 +98,7 @@ namespace PetStore.Services
 
             return products;
         }
-
+        //DONE
         public bool RemoveById(string id)
         {
             Product productToRemove = this.dbContext
@@ -117,7 +117,7 @@ namespace PetStore.Services
 
             return wasDeleted;
         }
-
+        //DONE
         public bool RemoveByName(string name)
         {
             Product productToRemove = this.dbContext
@@ -136,7 +136,7 @@ namespace PetStore.Services
 
             return removed;
         }
-
+        //DONE
         public void EditProduct(string id, EditProductInputServiceModel model)
         {
             try
@@ -167,6 +167,18 @@ namespace PetStore.Services
             {
                 throw new ArgumentException(ExceptionMessages.InvalidProductType);
             }
+        }
+
+        public ProductDetailsServiceModel GetById(string Id)
+        {
+            Product product = this.dbContext.Products.Find(Id);
+            if (product == null)
+            {
+                throw new ArgumentException(ExceptionMessages.ProductNotFound);
+            }
+            ProductDetailsServiceModel serviceModel = this.mapper.Map<ProductDetailsServiceModel>(product);
+
+            return serviceModel;
         }
     }
 }

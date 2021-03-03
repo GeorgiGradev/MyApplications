@@ -20,5 +20,7 @@ namespace PetStore.Services.Interfaces
         bool RemoveByName(string name);
 
         void EditProduct(string id, EditProductInputServiceModel model);
+
+        ProductDetailsServiceModel GetById(string Id);
     }
 }
