@@ -1,2 +1,1 @@
-# MyApplications
-Workshop applications
+# WorkshopProjects
