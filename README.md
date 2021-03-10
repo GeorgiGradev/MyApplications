@@ -1,1 +1,1 @@
-# WorkshopProjects
+# Workshop Projects
